@@ -51,6 +51,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
                 implementation("io.ktor:ktor-client-android:$ktor_version")
             }

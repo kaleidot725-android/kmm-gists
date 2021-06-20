@@ -8,9 +8,7 @@ import jp.kaleidot725.githubclient.api.dto.GistDto
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class GistApi(private val baseUrl: String) {
-    private val client = HttpClient()
-
+class GistApi(private val client: HttpClient, private val baseUrl: String) {
     suspend fun getGists(): List<GistDto> {
         val body = callGetMethod("$baseUrl/gists")
         return Json.decodeFromString(body)
