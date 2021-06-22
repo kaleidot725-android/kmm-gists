@@ -1,10 +1,11 @@
 package jp.kaleidot725.githubclient.api.dto
 
+
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OwnerDto(
+data class Owner(
     @SerialName("avatar_url")
     val avatarUrl: String,
     @SerialName("events_url")
@@ -19,7 +20,7 @@ data class OwnerDto(
     val gravatarId: String,
     @SerialName("html_url")
     val htmlUrl: String,
-    @SerialName("id:")
+    @SerialName("id")
     val id: Int,
     @SerialName("login")
     val login: String,

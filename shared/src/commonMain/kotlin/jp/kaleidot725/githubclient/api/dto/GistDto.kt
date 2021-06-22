@@ -1,5 +1,6 @@
 package jp.kaleidot725.githubclient.api.dto
 
+
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,8 +16,6 @@ data class GistDto(
     val createdAt: String,
     @SerialName("description")
     val description: String,
-    @SerialName("files")
-    val files: List<FileDto>,
     @SerialName("forks_url")
     val forksUrl: String,
     @SerialName("git_pull_url")
@@ -30,9 +29,9 @@ data class GistDto(
     @SerialName("node_id")
     val nodeId: String,
     @SerialName("owner")
-    val owner: OwnerDto,
+    val owner: Owner,
     @SerialName("public")
-    val isPublic: Boolean,
+    val `public`: Boolean,
     @SerialName("truncated")
     val truncated: Boolean,
     @SerialName("updated_at")

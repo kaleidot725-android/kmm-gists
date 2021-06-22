@@ -27,16 +27,16 @@ kotlin {
         val kotlin_version = "1.5.10"
         val coroutines_version = "1.5.0"
         val serialization_version = "1.2.1"
-        val ktor_version = "1.6.0"
+        val ktor_version = "1.5.4"
 
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2-native-mt")
                 api("io.ktor:ktor-client-core:$ktor_version")
                 api("io.ktor:ktor-client-json:$ktor_version")
                 api("io.ktor:ktor-client-serialization:$ktor_version")
+
             }
         }
 
@@ -49,10 +49,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
                 implementation("io.ktor:ktor-client-android:$ktor_version")
             }
         }
@@ -66,8 +63,6 @@ kotlin {
 
         val iosMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
                 implementation("io.ktor:ktor-client-ios:$ktor_version")
             }
         }

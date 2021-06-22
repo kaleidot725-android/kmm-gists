@@ -2,10 +2,26 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greeting()
+    let manager: HttpClientManager = HttpClientManager()
+    let gistApi : GistApi = GistApi(manager: HttpClientManager(), baseUrl: "https://api.github.com/users/kaleidot725")
 
-	var body: some View {
-		Text(greet)
+    @State var gists: String = ""
+    
+    var body: some View {
+        Text(gists)
+        Button("UPDATE") {
+            gistApi.getGists(
+                completionHandler: { (array, error) in
+                    if (array == nil) {
+                        return
+                    }
+
+                    let gists = array!.compactMap { $0 as? GistDto }
+                    let gistTexts = gists.compactMap { $0.description() }
+                    self.gists = gistTexts.joined()
+                }
+            )
+        }
 	}
 }
 
