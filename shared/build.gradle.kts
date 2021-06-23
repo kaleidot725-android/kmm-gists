@@ -36,7 +36,6 @@ kotlin {
                 api("io.ktor:ktor-client-core:$ktor_version")
                 api("io.ktor:ktor-client-json:$ktor_version")
                 api("io.ktor:ktor-client-serialization:$ktor_version")
-
             }
         }
 
