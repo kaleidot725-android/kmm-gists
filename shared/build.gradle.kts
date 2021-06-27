@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    kotlin("kapt")
     kotlin("plugin.serialization") version "1.5.0"
     id("com.android.library")
 }
@@ -27,6 +28,7 @@ kotlin {
         val kotlinVersion = "1.5.10"
         val coroutinesVersion = "1.4.2-native-mt"
         val ktorVersion = "1.5.4"
+        val koruVersion = "0.5.0"
 
         val commonMain by getting {
             dependencies {
@@ -35,6 +37,13 @@ kotlin {
                 api("io.ktor:ktor-client-core:$ktorVersion")
                 api("io.ktor:ktor-client-json:$ktorVersion")
                 api("io.ktor:ktor-client-serialization:$ktorVersion")
+
+                implementation("com.futuremind:koru:$koruVersion")
+                configurations["kapt"].dependencies.add(
+                    org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency(
+                        "com.futuremind", "koru-processor", koruVersion
+                    )
+                )
             }
         }
 
@@ -62,6 +71,7 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-ios:$ktorVersion")
+                kotlin.srcDir("${buildDir.absolutePath}/generated/source/kaptKotlin/")
             }
         }
 
