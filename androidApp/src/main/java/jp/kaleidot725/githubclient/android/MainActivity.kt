@@ -17,11 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import jp.kaleidot725.githubclient.api.apis.GistApi
 import jp.kaleidot725.githubclient.api.apis.HttpClientManager
+import jp.kaleidot725.githubclient.repository.GistRepository
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private val gistApi = GistApi(HttpClientManager(), "https://api.github.com/users/kaleidot725")
+    private val gistApi = GistApi(HttpClientManager(), "https://api.github.com/users")
+    private val gistRepository = GistRepository(gistApi)
+    private val userName = "kaleidot725"
     private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,11 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter),
-                    onClick = { scope.launch { gistsText = gistApi.getGists().toString() } }
+                    onClick = {
+                        scope.launch {
+                            gistsText = gistRepository.getGists(userName).toString()
+                        }
+                    }
                 ) {
                     Text(text = "UPDATE")
                 }

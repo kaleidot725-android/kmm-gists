@@ -2,14 +2,18 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    let gistApi : GistApi = GistApi(manager: HttpClientManager(), baseUrl: "https://api.github.com/users/kaleidot725")
-
+    let gistRepository : GistRepository = GistRepository(
+        gistApi: GistApi(manager: HttpClientManager(), baseUrl: "https://api.github.com/users")
+    )
+    let userName : String = "kaleidot725"
+    
     @State var gists: String = ""
     
     var body: some View {
         Text(gists)
         Button("UPDATE") {
-            gistApi.getGists(
+            gistRepository.getGists(
+                userName: userName,
                 completionHandler: { (array, error) in
                     if (array != nil) {
                         let gists = array!.compactMap { $0 as? GistDto }
