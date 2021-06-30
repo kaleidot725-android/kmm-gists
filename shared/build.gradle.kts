@@ -37,13 +37,6 @@ kotlin {
                 api("io.ktor:ktor-client-core:$ktorVersion")
                 api("io.ktor:ktor-client-json:$ktorVersion")
                 api("io.ktor:ktor-client-serialization:$ktorVersion")
-
-                implementation("com.futuremind:koru:$koruVersion")
-                configurations["kapt"].dependencies.add(
-                    org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency(
-                        "com.futuremind", "koru-processor", koruVersion
-                    )
-                )
             }
         }
 
@@ -71,7 +64,6 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-ios:$ktorVersion")
-                kotlin.srcDir("${buildDir.absolutePath}/generated/source/kaptKotlin/")
             }
         }
 
