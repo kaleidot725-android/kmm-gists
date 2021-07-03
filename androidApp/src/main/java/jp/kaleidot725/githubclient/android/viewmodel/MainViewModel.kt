@@ -12,6 +12,10 @@ class MainViewModel(private val gistRepository: GistRepository) : ViewModel() {
     private val _gists: MutableStateFlow<List<GistDto>> = MutableStateFlow(emptyList())
     val gists: StateFlow<List<GistDto>> = _gists
 
+    init {
+        fetchGists()
+    }
+
     fun fetchGists() {
         viewModelScope.launch {
             _gists.value = gistRepository.getGists("kaleidot725")

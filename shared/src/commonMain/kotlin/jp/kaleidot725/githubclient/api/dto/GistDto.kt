@@ -3,6 +3,9 @@ package jp.kaleidot725.githubclient.api.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.decodeFromJsonElement
 
 @Serializable
 data class GistDto(
@@ -29,7 +32,7 @@ data class GistDto(
     @SerialName("node_id")
     val nodeId: String,
     @SerialName("owner")
-    val owner: Owner,
+    val owner: OwnerDto,
     @SerialName("public")
     val `public`: Boolean,
     @SerialName("truncated")
@@ -37,5 +40,15 @@ data class GistDto(
     @SerialName("updated_at")
     val updatedAt: String,
     @SerialName("url")
-    val url: String
-)
+    val url: String,
+    @SerialName("files")
+    private val _gistFiles: JsonObject
+) {
+    val gistFiles: List<FileDto> = _gistFiles.values.mapNotNull {
+        try {
+            Json.decodeFromJsonElement(it)
+        } catch (e: Exception) {
+            null
+        }
+    }
+}
