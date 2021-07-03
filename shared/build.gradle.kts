@@ -28,7 +28,6 @@ kotlin {
         val kotlinVersion = "1.5.10"
         val coroutinesVersion = "1.4.2-native-mt"
         val ktorVersion = "1.5.4"
-        val koruVersion = "0.5.0"
 
         val commonMain by getting {
             dependencies {
