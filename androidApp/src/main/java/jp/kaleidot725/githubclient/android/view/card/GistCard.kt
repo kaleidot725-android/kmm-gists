@@ -1,5 +1,6 @@
 package jp.kaleidot725.githubclient.android.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,7 +15,7 @@ import jp.kaleidot725.githubclient.android.resources.TextStyles
 import jp.kaleidot725.githubclient.api.dto.GistDto
 
 @Composable
-fun GistCard(gist: GistDto) {
+fun GistCard(gist: GistDto, onClicked: ((GistDto) -> Unit)? = null) {
     val files = gist.gistFiles
     val firstFile = files.firstOrNull() ?: return
     val firstFileName = firstFile.filename
@@ -25,6 +26,7 @@ fun GistCard(gist: GistDto) {
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(8.dp)
+            .clickable { onClicked?.invoke(gist) }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = firstFileName, style = TextStyles.h6, color = Color.Black, maxLines = 2)

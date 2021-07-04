@@ -53,4 +53,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.0.0-rc01")
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0-rc01")
     implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
+
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha04")
 }

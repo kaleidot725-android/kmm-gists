@@ -14,13 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import jp.kaleidot725.githubclient.android.common.UiState
 import jp.kaleidot725.githubclient.android.resources.TextStyles
-import jp.kaleidot725.githubclient.android.viewmodel.MainViewModel
 import jp.kaleidot725.githubclient.api.dto.GistDto
-import org.koin.androidx.compose.getViewModel
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MainPage(viewModel: MainViewModel = getViewModel()) {
-    val gists by viewModel.gists.collectAsState()
+fun MainPage(
+    gistsFlow: StateFlow<UiState<List<GistDto>, Unit>>,
+    onClickedGist: ((GistDto) -> Unit)? = null
+) {
+    val gists by gistsFlow.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (gists) {
@@ -39,7 +41,7 @@ fun MainPage(viewModel: MainViewModel = getViewModel()) {
                 LazyColumn {
                     items(
                         (gists as UiState.Success<List<GistDto>>).data,
-                        itemContent = { gist -> GistCard(gist) }
+                        itemContent = { gist -> GistCard(gist, onClickedGist) }
                     )
                 }
             }
