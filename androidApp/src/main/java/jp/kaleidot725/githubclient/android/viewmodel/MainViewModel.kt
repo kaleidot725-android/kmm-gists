@@ -19,6 +19,7 @@ class MainViewModel(private val gistRepository: GistRepository) : ViewModel() {
     fun fetchGists() {
         viewModelScope.launch {
             _gists.value = UiState.Loading
+
             withContext(Dispatchers.IO) {
                 try {
                     _gists.value = UiState.Success(gistRepository.getGists(TEST_USER))

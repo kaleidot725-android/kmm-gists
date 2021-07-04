@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import jp.kaleidot725.githubclient.android.common.UiState
 import jp.kaleidot725.githubclient.android.resources.Strings.DETAILS_PAGE_TITLE
-import jp.kaleidot725.githubclient.android.resources.Strings.LOADING_ERROR
 import jp.kaleidot725.githubclient.android.resources.TextStyles
+import jp.kaleidot725.githubclient.android.view.components.LoadingError
 import jp.kaleidot725.githubclient.api.dto.FileDto
 import kotlinx.coroutines.flow.StateFlow
 
@@ -40,12 +40,7 @@ fun DetailPage(
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
                 is UiState.Error -> {
-                    Text(
-                        LOADING_ERROR,
-                        style = TextStyles.h6,
-                        color = Color.Red,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
+                    LoadingError(modifier = Modifier.align(Alignment.Center))
                 }
                 is UiState.Success -> {
                     // TODO

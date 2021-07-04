@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
                     val mainViewModel = getViewModel<MainViewModel>().apply { fetchGists() }
                     MainPage(
                         mainViewModel.gists,
-                        onClickedGist = { navController.navigate("Detail") }
+                        onClickedGist = { navController.navigate("Detail") },
+                        onFetchedGist = { mainViewModel.fetchGists() }
                     )
                 }
 
