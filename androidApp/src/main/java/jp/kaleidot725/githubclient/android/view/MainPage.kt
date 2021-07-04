@@ -17,13 +17,13 @@ import jp.kaleidot725.githubclient.android.common.UiState
 import jp.kaleidot725.githubclient.android.resources.Strings.MAIN_PAGE_TITLE
 import jp.kaleidot725.githubclient.android.resources.TextStyles
 import jp.kaleidot725.githubclient.android.view.components.LoadingError
-import jp.kaleidot725.githubclient.api.dto.GistDto
+import jp.kaleidot725.githubclient.model.GistItem
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun MainPage(
-    gistsFlow: StateFlow<UiState<List<GistDto>, Unit>>,
-    onClickedGist: ((GistDto) -> Unit)? = null,
+    gistsFlow: StateFlow<UiState<List<GistItem>, Unit>>,
+    onClickedGist: ((GistItem) -> Unit)? = null,
     onFetchedGist: (() -> Unit)? = null
 ) {
     val gists by gistsFlow.collectAsState()
@@ -49,7 +49,7 @@ fun MainPage(
                 }
                 is UiState.Success -> {
                     GistList(
-                        gists = (gists as UiState.Success<List<GistDto>>).data,
+                        gists = (gists as UiState.Success<List<GistItem>>).data,
                         onClicked = onClickedGist
                     )
                 }

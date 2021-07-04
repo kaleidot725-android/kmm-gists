@@ -7,4 +7,8 @@ class GistApi(private val manager: HttpClientManager, private val baseUrl: Strin
     suspend fun getGists(userName: String): Array<GistDto> {
         return manager.client.get("$baseUrl/$userName/gists")
     }
+
+    suspend fun getGist(userName: String, id: String): GistDto {
+        return manager.client.get("$baseUrl/$userName/gists/$id")
+    }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import jp.kaleidot725.githubclient.android.common.UiState
 import jp.kaleidot725.githubclient.android.resources.Strings.TEST_USER
-import jp.kaleidot725.githubclient.api.dto.GistDto
+import jp.kaleidot725.githubclient.model.GistItem
 import jp.kaleidot725.githubclient.repository.GistRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel(private val gistRepository: GistRepository) : ViewModel() {
-    private val _gists = MutableStateFlow<UiState<List<GistDto>, Unit>>(UiState.Loading)
-    val gists: StateFlow<UiState<List<GistDto>, Unit>> = _gists
+    private val _gists = MutableStateFlow<UiState<List<GistItem>, Unit>>(UiState.Loading)
+    val gists: StateFlow<UiState<List<GistItem>, Unit>> = _gists
 
     fun fetchGists() {
         viewModelScope.launch {

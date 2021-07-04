@@ -19,6 +19,7 @@ class DetailViewModel(private val gistRepository: GistRepository) : ViewModel() 
         viewModelScope.launch {
             _files.value = UiState.Loading
             withContext(Dispatchers.IO) {
+
             }
         }
     }

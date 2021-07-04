@@ -14,13 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import jp.kaleidot725.githubclient.android.resources.TextStyles
-import jp.kaleidot725.githubclient.api.dto.GistDto
+import jp.kaleidot725.githubclient.model.GistItem
 
 @Composable
 fun GistList(
-    gists: List<GistDto>,
+    gists: List<GistItem>,
     modifier: Modifier = Modifier,
-    onClicked: ((GistDto) -> Unit)? = null
+    onClicked: ((GistItem) -> Unit)? = null
 ) {
     LazyColumn(modifier = modifier) {
         items(gists, itemContent = { gist -> GistCard(gist, onClicked) })
@@ -28,12 +28,7 @@ fun GistList(
 }
 
 @Composable
-private fun GistCard(gist: GistDto, onClicked: ((GistDto) -> Unit)? = null) {
-    val files = gist.gistFiles
-    val firstFile = files.firstOrNull() ?: return
-    val firstFileName = firstFile.filename
-    val createdAt = gist.createdAt
-
+private fun GistCard(gist: GistItem, onClicked: ((GistItem) -> Unit)? = null) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,9 +37,9 @@ private fun GistCard(gist: GistDto, onClicked: ((GistDto) -> Unit)? = null) {
             .clickable { onClicked?.invoke(gist) }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = firstFileName, style = TextStyles.h6, color = Color.Black, maxLines = 2)
+            Text(text = gist.name, style = TextStyles.h6, color = Color.Black, maxLines = 2)
             Text(
-                text = createdAt,
+                text = gist.createdAt,
                 style = TextStyles.caption,
                 color = Color.Black,
                 maxLines = 1
