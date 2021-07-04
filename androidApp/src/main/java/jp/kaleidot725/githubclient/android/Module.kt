@@ -1,6 +1,7 @@
 package jp.kaleidot725.githubclient.android.di
 
 import android.content.Context
+import jp.kaleidot725.githubclient.android.viewmodel.DetailViewModel
 import jp.kaleidot725.githubclient.android.viewmodel.MainViewModel
 import jp.kaleidot725.githubclient.api.apis.GistApi
 import jp.kaleidot725.githubclient.api.apis.HttpClientManager
@@ -29,6 +30,10 @@ val repositoryModule = module {
 val viewModelModule = module {
     viewModel {
         MainViewModel(get())
+    }
+
+    viewModel {
+        DetailViewModel(get())
     }
 }
 

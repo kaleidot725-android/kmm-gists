@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import jp.kaleidot725.githubclient.android.di.setupKoin
 import jp.kaleidot725.githubclient.android.view.MainPage
 import jp.kaleidot725.githubclient.android.view.page.DetailPage
+import jp.kaleidot725.githubclient.android.viewmodel.DetailViewModel
 import jp.kaleidot725.githubclient.android.viewmodel.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
             NavHost(navController = navController, startDestination = "Main") {
                 composable("Main") {
-                    val mainViewModel = getViewModel<MainViewModel>()
+                    val mainViewModel = getViewModel<MainViewModel>().apply { fetchGists() }
                     MainPage(
                         mainViewModel.gists,
                         onClickedGist = { navController.navigate("Detail") }
@@ -29,7 +30,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 composable("Detail") {
-                    DetailPage()
+                    val detailViewModel = getViewModel<DetailViewModel>().apply { fetchFiles() }
+                    DetailPage(
+                        detailViewModel.files
+                    )
                 }
             }
         }
