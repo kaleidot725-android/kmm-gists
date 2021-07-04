@@ -1,4 +1,4 @@
-package jp.kaleidot725.githubclient.android.viewmodel
+package jp.kaleidot725.githubclient.android.common
 
 sealed class UiState<out T, out E> {
     object Loading : UiState<Nothing, Nothing>()
