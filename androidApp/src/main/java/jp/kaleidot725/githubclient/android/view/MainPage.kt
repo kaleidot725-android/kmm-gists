@@ -30,8 +30,8 @@ fun MainPage(viewModel: MainViewModel = getViewModel()) {
             is UiState.Error -> {
                 Text(
                     "Loading Error",
-                    style = TextStyles.h4,
-                    color = Color.Gray,
+                    style = TextStyles.h6,
+                    color = Color.Red,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
