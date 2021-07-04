@@ -44,11 +44,5 @@ data class GistDto(
     @SerialName("files")
     private val _gistFiles: JsonObject
 ) {
-    val gistFiles: List<FileDto> = _gistFiles.values.mapNotNull {
-        try {
-            Json.decodeFromJsonElement(it)
-        } catch (e: Exception) {
-            null
-        }
-    }
+    val gistFiles: List<FileDto> = _gistFiles.values.mapNotNull { Json.decodeFromJsonElement(it) }
 }

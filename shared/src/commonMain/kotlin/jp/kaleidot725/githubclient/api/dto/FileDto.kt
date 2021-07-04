@@ -9,11 +9,11 @@ data class FileDto(
     @SerialName("filename")
     val filename: String,
     @SerialName("language")
-    val language: String,
+    val language: String?,
     @SerialName("raw_url")
     val rawUrl: String,
     @SerialName("size")
     val size: Int,
     @SerialName("type")
-    val type: String
+    val type: String?
 )
