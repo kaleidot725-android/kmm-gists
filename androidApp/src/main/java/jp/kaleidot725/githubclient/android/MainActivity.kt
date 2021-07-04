@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import jp.kaleidot725.githubclient.android.di.setupKoin
 import jp.kaleidot725.githubclient.android.view.MainPage
 import jp.kaleidot725.githubclient.android.view.page.DetailPage
 import jp.kaleidot725.githubclient.android.viewmodel.DetailViewModel
@@ -16,10 +15,8 @@ import org.koin.androidx.compose.getViewModel
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupKoin(applicationContext)
         setContent {
             val navController = rememberNavController()
-
             NavHost(navController = navController, startDestination = "Main") {
                 composable("Main") {
                     val mainViewModel = getViewModel<MainViewModel>().apply { fetchGists() }
