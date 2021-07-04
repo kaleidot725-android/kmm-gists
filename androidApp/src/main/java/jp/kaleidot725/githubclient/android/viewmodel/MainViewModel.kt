@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val gistRepository: GistRepository) : ViewModel() {
-    private val _gists: MutableStateFlow<List<GistDto>> = MutableStateFlow(emptyList())
-    val gists: StateFlow<List<GistDto>> = _gists
+    private val _gists = MutableStateFlow<UiState<List<GistDto>, Unit>>(UiState.Loading)
+    val gists: StateFlow<UiState<List<GistDto>, Unit>> = _gists
 
     init {
         fetchGists()
@@ -18,7 +18,15 @@ class MainViewModel(private val gistRepository: GistRepository) : ViewModel() {
 
     fun fetchGists() {
         viewModelScope.launch {
-            _gists.value = gistRepository.getGists("kaleidot725")
+            try {
+                _gists.value = UiState.Success(gistRepository.getGists(TEST_USER))
+            } catch (e: Exception) {
+                _gists.value = UiState.Error(Unit)
+            }
         }
+    }
+
+    companion object {
+        val TEST_USER = "kaleidot725"
     }
 }

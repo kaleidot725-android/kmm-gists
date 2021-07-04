@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import jp.kaleidot725.githubclient.android.styles.TextStyles
+import jp.kaleidot725.githubclient.android.resources.TextStyles
 import jp.kaleidot725.githubclient.api.dto.GistDto
 
 @Composable

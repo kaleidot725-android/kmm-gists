@@ -1,4 +1,4 @@
-package jp.kaleidot725.githubclient.android.styles
+package jp.kaleidot725.githubclient.android.resources
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
