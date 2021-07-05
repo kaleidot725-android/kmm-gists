@@ -9,7 +9,7 @@ class GistRepositoryNative(private val gistRepository: GistRepository) : GistRep
         return SuspendWrapper { gistRepository.getGists(userName) }
     }
 
-    override fun getGistFiles(gist: GistItem): SuspendWrapper<List<FileItem>> {
-        return SuspendWrapper { gistRepository.getGistFiles(gist) }
+    override fun getGistFiles(gistId: String): SuspendWrapper<List<FileItem>> {
+        return SuspendWrapper { gistRepository.getGistFiles(gistId) }
     }
 }

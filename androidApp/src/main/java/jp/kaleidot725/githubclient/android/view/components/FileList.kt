@@ -13,45 +13,50 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import jp.kaleidot725.githubclient.android.common.UiState
 import jp.kaleidot725.githubclient.android.resources.TextStyles
-import jp.kaleidot725.githubclient.api.dto.GistDto
+import jp.kaleidot725.githubclient.model.FileItem
 
 @Composable
-fun FilesList(
-    gists: List<GistDto>,
+fun FileList(
+    files: List<FileItem>,
     modifier: Modifier = Modifier,
-    onClicked: ((GistDto) -> Unit)? = null
+    onClicked: ((FileItem) -> Unit)? = null
 ) {
     LazyColumn(modifier = modifier) {
-        items(
-            (gists as UiState.Success<List<GistDto>>).data,
-            itemContent = { gist -> GistCard(gist, onClicked) }
-        )
+        items(files, itemContent = { file -> FileCard(file, onClicked) })
     }
 }
 
 @Composable
-private fun GistCard(gist: GistDto, onClicked: ((GistDto) -> Unit)? = null) {
-    val files = gist.gistFiles
-    val firstFile = files.firstOrNull() ?: return
-    val firstFileName = firstFile.filename
-    val createdAt = gist.createdAt
-
+private fun FileCard(file: FileItem, onClicked: ((FileItem) -> Unit)? = null) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(8.dp)
-            .clickable { onClicked?.invoke(gist) }
+            .clickable { onClicked?.invoke(file) }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = firstFileName, style = TextStyles.h6, color = Color.Black, maxLines = 2)
+            Text(text = file.name, style = TextStyles.h6, color = Color.Black, maxLines = 2)
             Text(
-                text = createdAt,
+                text = file.language ?: "NONE LANGUAGE",
                 style = TextStyles.caption,
                 color = Color.Black,
                 maxLines = 1
+            )
+            Text(
+                text = file.type ?: "NONE TYPE",
+                style = TextStyles.caption,
+                color = Color.Black,
+                maxLines = 1
+            )
+            Text(
+                text = file.content,
+                style = TextStyles.h6,
+                color = Color.DarkGray,
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .padding(8.dp)
             )
         }
     }

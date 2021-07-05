@@ -17,7 +17,7 @@ val apiModule = module {
     }
 
     factory {
-        GistApi(get(), "https://api.github.com/users")
+        GistApi(get(), "https://api.github.com")
     }
 }
 

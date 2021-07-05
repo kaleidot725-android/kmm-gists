@@ -21,7 +21,7 @@ import jp.kaleidot725.githubclient.model.GistItem
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun MainPage(
+fun GistsPage(
     gistsFlow: StateFlow<UiState<List<GistItem>, Unit>>,
     onClickedGist: ((GistItem) -> Unit)? = null,
     onFetchedGist: (() -> Unit)? = null

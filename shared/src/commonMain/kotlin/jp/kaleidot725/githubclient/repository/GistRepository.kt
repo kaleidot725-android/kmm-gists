@@ -15,13 +15,21 @@ class GistRepository(private val gistApi: GistApi) {
         }
     }
 
-    suspend fun getGistFiles(gist: GistItem): List<FileItem> {
-        return emptyList()
+    suspend fun getGistFiles(gistId: String): List<FileItem> {
+        val gist = gistApi.getGist(gistId)
+        return gist.gistFiles.map {
+            FileItem(
+                name = it.filename,
+                language = it.language,
+                type = it.type,
+                content = it.content
+            )
+        }
     }
 
     interface Native {
         fun getGists(userName: String): SuspendWrapper<List<GistItem>>
-        fun getGistFiles(gist: GistItem): SuspendWrapper<List<FileItem>>
+        fun getGistFiles(gistId: String): SuspendWrapper<List<FileItem>>
     }
 }
 

@@ -3,10 +3,12 @@ package jp.kaleidot725.githubclient.android
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
-import jp.kaleidot725.githubclient.android.view.MainPage
+import jp.kaleidot725.githubclient.android.view.GistsPage
 import jp.kaleidot725.githubclient.android.view.page.DetailPage
 import jp.kaleidot725.githubclient.android.viewmodel.DetailViewModel
 import jp.kaleidot725.githubclient.android.viewmodel.MainViewModel
@@ -17,21 +19,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = "Main") {
-                composable("Main") {
+            NavHost(navController = navController, startDestination = "gists") {
+                composable("gists") {
                     val mainViewModel = getViewModel<MainViewModel>().apply { fetchGists() }
-                    MainPage(
+                    GistsPage(
                         mainViewModel.gists,
-                        onClickedGist = { navController.navigate("Detail") },
+                        onClickedGist = { navController.navigate("gists/${it.id}") },
                         onFetchedGist = { mainViewModel.fetchGists() }
                     )
                 }
 
-                composable("Detail") {
-                    val detailViewModel = getViewModel<DetailViewModel>().apply { fetchFiles() }
-                    DetailPage(
-                        detailViewModel.files
-                    )
+                composable(
+                    "gists/{id}",
+                    arguments = listOf(navArgument("id") { type = NavType.StringType })
+                ) {
+                    val id = it.arguments?.getString("id") ?: return@composable
+                    val detailViewModel = getViewModel<DetailViewModel>().apply { fetchFiles(id) }
+                    DetailPage(detailViewModel.files)
                 }
             }
         }

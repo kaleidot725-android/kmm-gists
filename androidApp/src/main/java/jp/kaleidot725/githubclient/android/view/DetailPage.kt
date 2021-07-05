@@ -16,13 +16,14 @@ import androidx.compose.ui.unit.dp
 import jp.kaleidot725.githubclient.android.common.UiState
 import jp.kaleidot725.githubclient.android.resources.Strings.DETAILS_PAGE_TITLE
 import jp.kaleidot725.githubclient.android.resources.TextStyles
+import jp.kaleidot725.githubclient.android.view.FileList
 import jp.kaleidot725.githubclient.android.view.components.LoadingError
-import jp.kaleidot725.githubclient.api.dto.FileDto
+import jp.kaleidot725.githubclient.model.FileItem
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun DetailPage(
-    filesFlow: StateFlow<UiState<List<FileDto>, Unit>>
+    filesFlow: StateFlow<UiState<List<FileItem>, Unit>>
 ) {
     val files by filesFlow.collectAsState()
 
@@ -43,7 +44,10 @@ fun DetailPage(
                     LoadingError(modifier = Modifier.align(Alignment.Center))
                 }
                 is UiState.Success -> {
-                    // TODO
+                    FileList(
+                        files = (files as UiState.Success<List<FileItem>>).data,
+                        onClicked = { /** TODO */ },
+                    )
                 }
             }
         }
