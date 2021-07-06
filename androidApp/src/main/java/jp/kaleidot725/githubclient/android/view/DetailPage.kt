@@ -44,10 +44,7 @@ fun DetailPage(
                     LoadingError(modifier = Modifier.align(Alignment.Center))
                 }
                 is UiState.Success -> {
-                    FileList(
-                        files = (files as UiState.Success<List<FileItem>>).data,
-                        onClicked = { /** TODO */ },
-                    )
+                    FileList(files = (files as UiState.Success<List<FileItem>>).data)
                 }
             }
         }

@@ -1,7 +1,6 @@
 package jp.kaleidot725.githubclient.android.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,23 +18,20 @@ import jp.kaleidot725.githubclient.model.FileItem
 
 @Composable
 fun FileList(
-    files: List<FileItem>,
-    modifier: Modifier = Modifier,
-    onClicked: ((FileItem) -> Unit)? = null
+    files: List<FileItem>, modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
-        items(files, itemContent = { file -> FileCard(file, onClicked) })
+        items(files, itemContent = { file -> FileCard(file) })
     }
 }
 
 @Composable
-private fun FileCard(file: FileItem, onClicked: ((FileItem) -> Unit)? = null) {
+private fun FileCard(file: FileItem) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(8.dp)
-            .clickable { onClicked?.invoke(file) }
     ) {
         Column {
             Text(
