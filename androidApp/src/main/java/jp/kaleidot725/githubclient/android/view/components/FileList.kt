@@ -1,5 +1,6 @@
 package jp.kaleidot725.githubclient.android.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,27 +37,26 @@ private fun FileCard(file: FileItem, onClicked: ((FileItem) -> Unit)? = null) {
             .padding(8.dp)
             .clickable { onClicked?.invoke(file) }
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = file.name, style = TextStyles.h6, color = Color.Black, maxLines = 2)
+        Column {
             Text(
-                text = file.language ?: "NONE LANGUAGE",
-                style = TextStyles.caption,
-                color = Color.Black,
-                maxLines = 1
+                text = file.name,
+                style = TextStyles.h6,
+                color = Color.White,
+                maxLines = 2,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .background(Color.Magenta)
+                    .padding(8.dp)
             )
-            Text(
-                text = file.type ?: "NONE TYPE",
-                style = TextStyles.caption,
-                color = Color.Black,
-                maxLines = 1
-            )
+
             Text(
                 text = file.content,
-                style = TextStyles.h6,
+                style = TextStyles.caption,
                 color = Color.DarkGray,
                 modifier = Modifier
                     .wrapContentHeight()
-                    .padding(8.dp)
+                    .padding(16.dp)
             )
         }
     }
