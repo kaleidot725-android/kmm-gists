@@ -5,9 +5,9 @@ struct ContentView: View {
     let coroutineScope = CoroutineScopeFactory().create()
     
     let gistRepositoryNative = GistRepositoryNative(
-        gistApi: GistApi(manager: HttpClientManager(), baseUrl: "https://api.github.com/users")
+        gistRepository: GistRepository(gistApi: GistApi(manager: HttpClientManager(), baseUrl:"https://api.github.com/users"))
     )
-    
+
     let userName : String = "kaleidot725"
     
     

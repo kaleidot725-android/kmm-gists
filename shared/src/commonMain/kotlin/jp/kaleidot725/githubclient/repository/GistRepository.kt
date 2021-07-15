@@ -1,7 +1,6 @@
 package jp.kaleidot725.githubclient.repository
 
 import jp.kaleidot725.githubclient.api.apis.GistApi
-import jp.kaleidot725.githubclient.common.SuspendWrapper
 import jp.kaleidot725.githubclient.model.FileItem
 import jp.kaleidot725.githubclient.model.GistItem
 
@@ -17,19 +16,14 @@ class GistRepository(private val gistApi: GistApi) {
 
     suspend fun getGistFiles(gistId: String): List<FileItem> {
         val gist = gistApi.getGist(gistId)
-        return gist.gistFiles.map {
+        return gist.gistFiles.map { item ->
             FileItem(
-                name = it.filename,
-                language = it.language,
-                type = it.type,
-                content = it.content
+                name = item.filename,
+                language = item.language,
+                type = item.type,
+                content = item.content
             )
         }
-    }
-
-    interface Native {
-        fun getGists(userName: String): SuspendWrapper<List<GistItem>>
-        fun getGistFiles(gistId: String): SuspendWrapper<List<FileItem>>
     }
 }
 
