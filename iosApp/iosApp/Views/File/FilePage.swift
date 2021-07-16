@@ -9,12 +9,12 @@
 import SwiftUI
 import shared
 
-struct FileList: View {
-    var files: [FileItem]
-    
+struct FilePage: View {
+    @ObservedObject var viewModel :FilePageViewModel
+
     var body: some View {
         List {
-            ForEach(files, id: \.name) { file in
+            ForEach(viewModel.files, id: \.name) { file in
                 FileRow(file: file)
             }
         }.navigationTitle("Files")
@@ -23,6 +23,6 @@ struct FileList: View {
 
 struct FileList_Previews: PreviewProvider {
     static var previews: some View {
-        FileList(files: sampleFiles)
+        FilePage(viewModel: FilePageViewModel())
     }
 }

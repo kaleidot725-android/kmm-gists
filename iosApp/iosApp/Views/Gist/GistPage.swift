@@ -9,14 +9,14 @@
 import SwiftUI
 import shared
 
-struct GistList: View {
-    var gists : [GistItem]
+struct GistPage: View {
+    @ObservedObject var viewModel : GistPageViewModel
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(gists, id: \.id) { gist in
-                    NavigationLink(destination: FileList(files: sampleFiles)) {
+                ForEach(viewModel.gists, id: \.id) { gist in
+                    NavigationLink(destination: FilePage(viewModel: FilePageViewModel())) {
                         GistRow(gist: gist)
                     }
                 }
@@ -28,6 +28,6 @@ struct GistList: View {
 
 struct GistList_Previews: PreviewProvider {
     static var previews: some View {
-        GistList(gists: sampleGists)
+        GistPage(viewModel: GistPageViewModel())
     }
 }

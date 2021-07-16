@@ -14,7 +14,7 @@ struct ContentView: View {
     @State var gists: String = ""
     
     var body: some View {
-        GistList(gists: sampleGists)
+        GistPage(viewModel: GistPageViewModel())
         
 //        Button("UPDATE") {
 //            gistRepositoryNative.getGists(userName: userName).subscribe(
