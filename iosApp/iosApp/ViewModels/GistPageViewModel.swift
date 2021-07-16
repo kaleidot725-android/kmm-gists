@@ -10,6 +10,34 @@ import Foundation
 import Combine
 import shared
 
-class GistPageViewModel: ObservableObject {
+class GistPageViewModel : ObservableObject {
+    private let userName: String
+    private let gistRepository: GistRepositoryNative
+    private let coroutineScope: Kotlinx_coroutines_coreCoroutineScope
+
     @Published var gists: [GistItem] = sampleGists
+
+    init(userName: String, gistRepository: GistRepositoryNative, coroutineScope: Kotlinx_coroutines_coreCoroutineScope) {
+        self.userName = userName
+        self.gistRepository = gistRepository
+        self.coroutineScope = coroutineScope
+        fetchGists()
+    }
+    
+    func fetchGists() {
+        gistRepository
+            .getGists(userName: userName)
+            .subscribe(
+                scope: coroutineScope,
+                onSuccess: { array in
+                    if (array != nil) {
+                        self.gists = array!.compactMap { $0 as? GistItem }
+                    }
+                },
+                onThrow: { throwable in
+                    print(throwable.description())
+                    self.gists = []
+                }
+            )
+    }
 }

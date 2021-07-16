@@ -16,7 +16,7 @@ struct GistPage: View {
         NavigationView {
             List {
                 ForEach(viewModel.gists, id: \.id) { gist in
-                    NavigationLink(destination: FilePage(viewModel: FilePageViewModel())) {
+                    NavigationLink(destination: FilePage(viewModel: AppModule.getFilePageViewModel(gistId: gist.id))) {
                         GistRow(gist: gist)
                     }
                 }
@@ -28,6 +28,6 @@ struct GistPage: View {
 
 struct GistList_Previews: PreviewProvider {
     static var previews: some View {
-        GistPage(viewModel: GistPageViewModel())
+        GistPage(viewModel: AppModule.getGistPageViewModel())
     }
 }

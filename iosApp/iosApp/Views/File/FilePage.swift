@@ -23,6 +23,6 @@ struct FilePage: View {
 
 struct FileList_Previews: PreviewProvider {
     static var previews: some View {
-        FilePage(viewModel: FilePageViewModel())
+        FilePage(viewModel: AppModule.getFilePageViewModel(gistId: ""))
     }
 }
