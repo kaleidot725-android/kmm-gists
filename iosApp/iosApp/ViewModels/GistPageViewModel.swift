@@ -15,7 +15,7 @@ class GistPageViewModel : ObservableObject {
     private let gistRepository: GistRepositoryNative
     private let coroutineScope: Kotlinx_coroutines_coreCoroutineScope
 
-    @Published var gists: [GistItem] = sampleGists
+    @Published var gists: [GistItem] = []
 
     init(userName: String, gistRepository: GistRepositoryNative, coroutineScope: Kotlinx_coroutines_coreCoroutineScope) {
         self.userName = userName

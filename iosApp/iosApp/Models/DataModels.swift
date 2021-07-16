@@ -10,10 +10,12 @@ import Foundation
 import shared
 
 class AppModule {
-    static let userName : String = "kaleidot725"
-    static let coroutineScope = CoroutineScopeFactory().create()
+    private static let userName : String = "kaleidot725"
+    private static let baseUrl : String = "https://api.github.com"
+    private static let coroutineScope = CoroutineScopeFactory().create()
+    
     static let gistRepositoryNative = GistRepositoryNative(
-        gistRepository: GistRepository(gistApi: GistApi(manager: HttpClientManager(), baseUrl:"https://api.github.com"))
+        gistRepository: GistRepository(gistApi: GistApi(manager: HttpClientManager(), baseUrl: baseUrl))
     )
 
     static func getGistPageViewModel() -> GistPageViewModel {
@@ -28,30 +30,3 @@ class AppModule {
         )
     }
 }
-
-let sampleGists = [
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"),
-    GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01")
-]
-
-let sampleFiles = [
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent"),
-    FileItem(name: "name", language: "languge", type: "type", content: "cotent")
-]
-

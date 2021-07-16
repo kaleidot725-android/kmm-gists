@@ -22,7 +22,24 @@ struct FilePage: View {
 }
 
 struct FileList_Previews: PreviewProvider {
+    static let files: [FileItem] = [
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
+        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg")
+    ]
+    
     static var previews: some View {
-        FilePage(viewModel: AppModule.getFilePageViewModel(gistId: ""))
+        let viewModel = AppModule.getFilePageViewModel(gistId: "")
+        viewModel.files = self.files
+        return FilePage(viewModel: viewModel)
     }
 }

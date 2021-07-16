@@ -15,7 +15,7 @@ class FilePageViewModel: ObservableObject {
     private let gistRepository: GistRepositoryNative
     private let coroutineScope: Kotlinx_coroutines_coreCoroutineScope
     
-    @Published var files: [FileItem] = sampleFiles
+    @Published var files: [FileItem] = []
     
     init(gistId: String, gistRepository: GistRepositoryNative, coroutineScope: Kotlinx_coroutines_coreCoroutineScope) {
         self.gistId = gistId

@@ -27,7 +27,23 @@ struct GistPage: View {
 }
 
 struct GistList_Previews: PreviewProvider {
+    static let gists : [GistItem] = [
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
+        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23")
+    ]
+    
     static var previews: some View {
-        GistPage(viewModel: AppModule.getGistPageViewModel())
+        let viewModel = AppModule.getGistPageViewModel()
+        viewModel.gists = self.gists
+        return GistPage(viewModel: viewModel)
     }
 }

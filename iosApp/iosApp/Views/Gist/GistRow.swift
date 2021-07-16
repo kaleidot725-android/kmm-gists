@@ -27,6 +27,6 @@ struct GistRow: View {
 
 struct GistRow_Preview: PreviewProvider {
     static var previews: some View {
-        GistRow(gist: sampleGists[0])
+        GistRow(gist: GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"))
     }
 }
