@@ -1,32 +1,32 @@
 //
-//  GistItem.swift
+//  FileRow.swift
 //  iosApp
 //
-//  Created by kaleidot725 on 2021/07/15.
+//  Created by kaleidot725 on 2021/07/16.
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
 import SwiftUI
 import shared
 
-struct GistRow: View {
-    var gist: GistItem
+struct FileRow: View {
+    var file: FileItem
     
     var body: some View {
         VStack {
-            Text(gist.name)
+            Text(file.name)
                 .font(.title2)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(gist.createdAt)
+            Text(file.content)
                 .font(.caption)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }.padding(8)
     }
 }
 
-struct GistRow_Preview: PreviewProvider {
+struct FileRow_Previews: PreviewProvider {
     static var previews: some View {
-        GistRow(gist: GistItem(id: "id", name: "TITLE", createdAt: "2020/01/01"))
+        FileRow(file: sampleFiles[0])
     }
 }

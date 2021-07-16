@@ -7,15 +7,22 @@
 //
 
 import SwiftUI
+import shared
 
 struct FileList: View {
+    var files: [FileItem]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(files, id: \.name) { file in
+                FileRow(file: file)
+            }
+        }.navigationTitle("Files")
     }
 }
 
 struct FileList_Previews: PreviewProvider {
     static var previews: some View {
-        FileList()
+        FileList(files: sampleFiles)
     }
 }
