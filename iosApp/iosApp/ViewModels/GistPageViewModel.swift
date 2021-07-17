@@ -22,7 +22,6 @@ class GistPageViewModel : ObservableObject {
         self.userName = userName
         self.gistRepository = gistRepository
         self.coroutineScope = coroutineScope
-        fetchGists()
     }
     
     func fetchGists() {

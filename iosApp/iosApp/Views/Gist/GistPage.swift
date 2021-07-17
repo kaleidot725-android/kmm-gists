@@ -27,9 +27,14 @@ struct GistPage: View {
                 }
                 .navigationTitle("Gists")
             case GistPageViewModel.UiState.failed :
-                Text("HAS ERROR")
+                VStack {
+                    Text("Loading Error!!").font(.title2)
+                    Button(action: { viewModel.fetchGists() }) { Text("Retry") }
+                }
             }
-        }
+        }.onAppear(perform: {
+            viewModel.fetchGists()
+        })
     }
 }
 

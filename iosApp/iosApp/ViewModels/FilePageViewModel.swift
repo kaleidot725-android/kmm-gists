@@ -22,7 +22,6 @@ class FilePageViewModel: ObservableObject {
         self.gistId = gistId
         self.gistRepository = gistRepository
         self.coroutineScope = coroutineScope
-        fetchFiles()
     }
     
     func fetchFiles() {

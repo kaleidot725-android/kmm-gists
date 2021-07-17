@@ -13,18 +13,25 @@ struct FilePage: View {
     @ObservedObject var viewModel :FilePageViewModel
 
     var body: some View {
-        switch viewModel.state {
-        case FilePageViewModel.UiState.loading :
-            ProgressView()
-        case FilePageViewModel.UiState.success :
-            List {
-                ForEach(viewModel.files, id: \.name) { file in
-                    FileRow(file: file)
+        ZStack {
+            switch viewModel.state {
+            case FilePageViewModel.UiState.loading :
+                ProgressView()
+            case FilePageViewModel.UiState.success :
+                List {
+                    ForEach(viewModel.files, id: \.name) { file in
+                        FileRow(file: file)
+                    }
+                }.navigationTitle("Files")
+            case FilePageViewModel.UiState.failed :
+                VStack {
+                    Text("Loading Error!!").font(.title2)
+                    Button(action: { viewModel.fetchFiles() }) { Text("Retry") }
                 }
-            }.navigationTitle("Files")
-        case FilePageViewModel.UiState.failed :
-            Text("HAS ERROR")
-        }
+            }
+        }.onAppear(perform: {
+            viewModel.fetchFiles()
+        })
     }
 }
 
