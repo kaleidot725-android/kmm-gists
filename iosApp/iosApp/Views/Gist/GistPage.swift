@@ -4,7 +4,7 @@
 //
 //  Created by kaleidot725 on 2021/07/15.
 //  Copyright © 2021 orgName. All rights reserved.
-//
+//b
 
 import SwiftUI
 import shared
@@ -14,36 +14,30 @@ struct GistPage: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.gists, id: \.id) { gist in
-                    NavigationLink(destination: FilePage(viewModel: AppModule.getFilePageViewModel(gistId: gist.id))) {
-                        GistRow(gist: gist)
+            switch viewModel.state {
+            case GistPageViewModel.UiState.loading :
+                ProgressView()
+            case GistPageViewModel.UiState.success :
+                List {
+                    ForEach(viewModel.gists, id: \.id) { gist in
+                        NavigationLink(destination: FilePage(viewModel: AppModule.getFilePageViewModel(gistId: gist.id))) {
+                            GistRow(gist: gist)
+                        }
                     }
                 }
+                .navigationTitle("Gists")
+            case GistPageViewModel.UiState.failed :
+                Text("HAS ERROR")
             }
-            .navigationTitle("Gists")
         }
     }
 }
 
 struct GistList_Previews: PreviewProvider {
-    static let gists : [GistItem] = [
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23"),
-        GistItem(id: "Id", name: "Name", createdAt: "2021-07-17 1:23")
-    ]
-    
     static var previews: some View {
         let viewModel = AppModule.getGistPageViewModel()
-        viewModel.gists = self.gists
+        viewModel.state = GistPageViewModel.UiState.success
+        viewModel.gists = sampleGists
         return GistPage(viewModel: viewModel)
     }
 }

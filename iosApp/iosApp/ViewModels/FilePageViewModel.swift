@@ -15,6 +15,7 @@ class FilePageViewModel: ObservableObject {
     private let gistRepository: GistRepositoryNative
     private let coroutineScope: Kotlinx_coroutines_coreCoroutineScope
     
+    @Published var state: UiState = UiState.loading
     @Published var files: [FileItem] = []
     
     init(gistId: String, gistRepository: GistRepositoryNative, coroutineScope: Kotlinx_coroutines_coreCoroutineScope) {
@@ -25,18 +26,25 @@ class FilePageViewModel: ObservableObject {
     }
     
     func fetchFiles() {
+        self.state = UiState.loading
         gistRepository.getGistFiles(gistId: gistId)
             .subscribe(
             scope: coroutineScope,
             onSuccess: { array in
-                if (array != nil) {
-                    self.files = array!.compactMap { $0 as? FileItem }
-                }
+                self.files = (array != nil) ? array!.compactMap { $0 as? FileItem } : []
+                self.state = UiState.success
             },
             onThrow: { throwable in
                 print(throwable.description())
                 self.files = []
+                self.state = UiState.failed
             }
         )
+    }
+    
+    enum UiState {
+        case loading
+        case success
+        case failed
     }
 }

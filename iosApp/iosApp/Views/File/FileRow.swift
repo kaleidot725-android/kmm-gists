@@ -27,6 +27,6 @@ struct FileRow: View {
 
 struct FileRow_Previews: PreviewProvider {
     static var previews: some View {
-        FileRow(file: FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"))
+        FileRow(file: sampleFiles[0])
     }
 }

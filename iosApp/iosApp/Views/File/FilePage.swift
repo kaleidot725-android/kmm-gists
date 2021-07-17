@@ -13,33 +13,25 @@ struct FilePage: View {
     @ObservedObject var viewModel :FilePageViewModel
 
     var body: some View {
-        List {
-            ForEach(viewModel.files, id: \.name) { file in
-                FileRow(file: file)
-            }
-        }.navigationTitle("Files")
+        switch viewModel.state {
+        case FilePageViewModel.UiState.loading :
+            ProgressView()
+        case FilePageViewModel.UiState.success :
+            List {
+                ForEach(viewModel.files, id: \.name) { file in
+                    FileRow(file: file)
+                }
+            }.navigationTitle("Files")
+        case FilePageViewModel.UiState.failed :
+            Text("HAS ERROR")
+        }
     }
 }
 
 struct FileList_Previews: PreviewProvider {
-    static let files: [FileItem] = [
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg"),
-        FileItem(name: "Name", language: "Language", type: "Type", content: "Content abcdefg")
-    ]
-    
     static var previews: some View {
         let viewModel = AppModule.getFilePageViewModel(gistId: "")
-        viewModel.files = self.files
+        viewModel.files = sampleFiles
         return FilePage(viewModel: viewModel)
     }
 }
