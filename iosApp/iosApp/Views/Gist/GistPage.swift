@@ -11,7 +11,7 @@ import shared
 
 struct GistPage: View {
     @ObservedObject var viewModel : GistPageViewModel
-
+    
     var body: some View {
         NavigationView {
             switch viewModel.state {

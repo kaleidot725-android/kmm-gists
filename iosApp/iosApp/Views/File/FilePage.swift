@@ -11,7 +11,7 @@ import shared
 
 struct FilePage: View {
     @ObservedObject var viewModel :FilePageViewModel
-
+    
     var body: some View {
         ZStack {
             switch viewModel.state {

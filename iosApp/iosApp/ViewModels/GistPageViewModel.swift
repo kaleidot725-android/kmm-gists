@@ -14,7 +14,7 @@ class GistPageViewModel : ObservableObject {
     private let userName: String
     private let gistRepository: GistRepositoryNative
     private let coroutineScope: Kotlinx_coroutines_coreCoroutineScope
-
+    
     @Published var state: UiState = UiState.loading
     @Published var gists : [GistItem] = []
     

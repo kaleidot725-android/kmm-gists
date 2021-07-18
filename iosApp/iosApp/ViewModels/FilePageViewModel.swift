@@ -28,17 +28,17 @@ class FilePageViewModel: ObservableObject {
         self.state = UiState.loading
         gistRepository.getGistFiles(gistId: gistId)
             .subscribe(
-            scope: coroutineScope,
-            onSuccess: { array in
-                self.files = (array != nil) ? array!.compactMap { $0 as? FileItem } : []
-                self.state = UiState.success
-            },
-            onThrow: { throwable in
-                print(throwable.description())
-                self.files = []
-                self.state = UiState.failed
-            }
-        )
+                scope: coroutineScope,
+                onSuccess: { array in
+                    self.files = (array != nil) ? array!.compactMap { $0 as? FileItem } : []
+                    self.state = UiState.success
+                },
+                onThrow: { throwable in
+                    print(throwable.description())
+                    self.files = []
+                    self.state = UiState.failed
+                }
+            )
     }
     
     enum UiState {

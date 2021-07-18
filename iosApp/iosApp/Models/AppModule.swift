@@ -17,7 +17,7 @@ class AppModule {
     static let gistRepositoryNative = GistRepositoryNative(
         gistRepository: GistRepository(gistApi: GistApi(manager: HttpClientManager(), baseUrl: baseUrl))
     )
-
+    
     static func getGistPageViewModel() -> GistPageViewModel {
         return GistPageViewModel(
             userName: userName, gistRepository: gistRepositoryNative, coroutineScope: coroutineScope
