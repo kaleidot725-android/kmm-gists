@@ -1,4 +1,4 @@
-package jp.kaleidot725.githubclient.android.resources
+package jp.kaleidot725.githubclient.android.common
 
 object Strings {
     val TEST_USER = "kaleidot725"

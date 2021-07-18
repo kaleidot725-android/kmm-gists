@@ -9,8 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import jp.kaleidot725.githubclient.android.resources.Strings
-import jp.kaleidot725.githubclient.android.resources.TextStyles
+import jp.kaleidot725.githubclient.android.common.Strings
+import jp.kaleidot725.githubclient.android.common.TextStyles
 
 @Composable
 fun LoadingError(modifier: Modifier = Modifier, onRetry: (() -> Unit)? = null) {

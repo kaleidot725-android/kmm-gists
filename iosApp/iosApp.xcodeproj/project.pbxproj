@@ -73,15 +73,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		4EA18D4626A05F1A00A5B56B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4EA18D5426A1B69900A5B56B /* AppModule.swift */,
-				4EA18D6226A2705A00A5B56B /* SampleData.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		4EA18D5826A1C72800A5B56B /* File */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +100,15 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		4EA18D6426A3F00000A5B56B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				4EA18D5426A1B69900A5B56B /* AppModule.swift */,
+				4EA18D6226A2705A00A5B56B /* SampleData.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +129,8 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				4EA18D6426A3F00000A5B56B /* Common */,
 				4EA18D5B26A1D0F600A5B56B /* ViewModels */,
-				4EA18D4626A05F1A00A5B56B /* Models */,
 				4EA18D4526A05F0B00A5B56B /* Views */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,

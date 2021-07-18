@@ -8,10 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
-import jp.kaleidot725.githubclient.android.view.GistsPage
-import jp.kaleidot725.githubclient.android.view.page.DetailPage
-import jp.kaleidot725.githubclient.android.viewmodel.DetailViewModel
-import jp.kaleidot725.githubclient.android.viewmodel.MainViewModel
+import jp.kaleidot725.githubclient.android.view.GistPage
+import jp.kaleidot725.githubclient.android.view.page.FilePage
+import jp.kaleidot725.githubclient.android.viewmodel.FilePageViewModel
+import jp.kaleidot725.githubclient.android.viewmodel.GistPageViewModel
 import org.koin.androidx.compose.getViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = "gists") {
                 composable("gists") {
-                    val mainViewModel = getViewModel<MainViewModel>().apply { fetchGists() }
-                    GistsPage(
-                        mainViewModel.gists,
+                    val mainViewModel = getViewModel<GistPageViewModel>().apply { fetchGists() }
+                    GistPage(
+                        mainViewModel.gistStatus,
                         onClickedGist = { navController.navigate("gists/${it.id}") },
                         onFetchedGist = { mainViewModel.fetchGists() }
                     )
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
                     arguments = listOf(navArgument("id") { type = NavType.StringType })
                 ) {
                     val id = it.arguments?.getString("id") ?: return@composable
-                    val detailViewModel = getViewModel<DetailViewModel>().apply { fetchFiles(id) }
-                    DetailPage(detailViewModel.files)
+                    val detailViewModel = getViewModel<FilePageViewModel>().apply { fetchFiles(id) }
+                    FilePage(detailViewModel.fileStatus)
                 }
             }
         }

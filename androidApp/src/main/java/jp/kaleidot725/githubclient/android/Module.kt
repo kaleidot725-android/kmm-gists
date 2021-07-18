@@ -1,8 +1,8 @@
 package jp.kaleidot725.githubclient.android.di
 
 import android.content.Context
-import jp.kaleidot725.githubclient.android.viewmodel.DetailViewModel
-import jp.kaleidot725.githubclient.android.viewmodel.MainViewModel
+import jp.kaleidot725.githubclient.android.viewmodel.FilePageViewModel
+import jp.kaleidot725.githubclient.android.viewmodel.GistPageViewModel
 import jp.kaleidot725.githubclient.api.apis.GistApi
 import jp.kaleidot725.githubclient.api.apis.HttpClientManager
 import jp.kaleidot725.githubclient.repository.GistRepository
@@ -29,11 +29,11 @@ val repositoryModule = module {
 
 val viewModelModule = module {
     viewModel {
-        MainViewModel(get())
+        GistPageViewModel(get())
     }
 
     viewModel {
-        DetailViewModel(get())
+        FilePageViewModel(get())
     }
 }
 

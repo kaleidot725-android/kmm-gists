@@ -3,8 +3,7 @@ package jp.kaleidot725.githubclient.android.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import jp.kaleidot725.githubclient.android.common.UiState
-import jp.kaleidot725.githubclient.android.resources.Strings.TEST_USER
-import jp.kaleidot725.githubclient.model.GistItem
+import jp.kaleidot725.githubclient.model.FileItem
 import jp.kaleidot725.githubclient.repository.GistRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,19 +11,21 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainViewModel(private val gistRepository: GistRepository) : ViewModel() {
-    private val _gists = MutableStateFlow<UiState<List<GistItem>, Unit>>(UiState.Loading)
-    val gists: StateFlow<UiState<List<GistItem>, Unit>> = _gists
+class FilePageViewModel(private val gistRepository: GistRepository) : ViewModel() {
+    private val _filestatus = MutableStateFlow<UiState<List<FileItem>, Unit>>(UiState.Loading)
+    val fileStatus: StateFlow<UiState<List<FileItem>, Unit>> = _filestatus
 
-    fun fetchGists() {
+    fun fetchFiles(gistId: String) {
         viewModelScope.launch {
-            _gists.value = UiState.Loading
+            _filestatus.value = UiState.Loading
 
             withContext(Dispatchers.IO) {
                 try {
-                    _gists.value = UiState.Success(gistRepository.getGists(TEST_USER))
+                    _filestatus.value = UiState.Success(
+                        gistRepository.getGistFiles(gistId)
+                    )
                 } catch (e: Exception) {
-                    _gists.value = UiState.Error(Unit)
+                    _filestatus.value = UiState.Error(Unit)
                 }
             }
         }
